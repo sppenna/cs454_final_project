@@ -5,7 +5,8 @@ def SmallestMultiple(k, n):
     parent = {}
     visited = {}
     #list of adjacent nodes
-    adjList = map(lambda x: ((int(0) * 10 + int(x)) % int(k), x), n)
+    inputList = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+    adjList = map( lambda x: ((10 + int(x)) % int(k), x), inputList ) 
     state, queue, parent, visited, adjList = BuildAdjList(state, queue, parent, visited, adjList)
     return MinString(state, queue, parent, visited, n, k)
 
@@ -28,9 +29,10 @@ def MinString(state, queue, parent, visited, n, k):
             break
         searchNext = queue.pop()
         state      = searchNext[0]
-    
+
+        inputList = [2, 3, 4, 5, 6, 7, 8, 9, 10]
         if state != 0:
-            adjList = map(lambda x: ((int(state) * 10 + int(x)) % int(k), x), n)
+            adjList = map( lambda x: ((int(state) * 10 + int(x)) % int(k), x), inputList )
             state, queue, parent, visited, adjList = BuildAdjList(searchNext, queue, parent, visited, adjList)
         else:
             #reached an accepting state append the queue to output string until you reach -1
