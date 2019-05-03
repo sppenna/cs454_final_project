@@ -24,9 +24,11 @@ def MinString(state, queue, parent, visited, n, k):
     out = ""
     #Begin BFS
     #go through queue of adjacent possible moves.
+    count = 0
     while True:
         if len(queue) <= 0:
             break
+    
         searchNext = queue.pop()
         state      = searchNext[0]
 
@@ -36,11 +38,15 @@ def MinString(state, queue, parent, visited, n, k):
             state, queue, parent, visited, adjList = BuildAdjList(searchNext, queue, parent, visited, adjList)
         else:
             #reached an accepting state append the queue to output string until you reach -1
-            while searchNext[0] != -1:
+            while searchNext[0] != -1 and len(out) <= n:
                 out += str(searchNext[1])
                 searchNext = parent[searchNext[0]]
             #reverse the string and return 
+            if len(out) > n:
+                break
             return out[::-1] 
+
+        count += 1
     
     return "No solution exists"
 
