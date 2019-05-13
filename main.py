@@ -19,6 +19,7 @@ def main():
     print('\n')
     
     while True:
+        print("**************************************************")
         # Get values for n, m, d
         n = int(input("Enter value for N in the range (1 - 99,999): "))
         digitString = "1 2 3 4 5 6 7 8 9"
@@ -41,7 +42,7 @@ def main():
                 print("No solution")
             else:
                 print("The number of palindromes of size M: ", palindromes)
-            print('\n')
+
 
 def dfaDelta(initialState, inputSymbol, k):
     return (10 * initialState + inputSymbol) % k
@@ -109,6 +110,6 @@ def generateM(k, digitSet, startState, m):
     return queue
     
 def generateM_Prime(k, digitSet, startState, m):
-
+    print("in progress")
 
 main()
