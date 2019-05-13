@@ -1,9 +1,15 @@
+'''
+CS 454: Final Project
+
+This program will the number of palindromes of size M
+that are multiples of number N using as designated
+language of digits D.
+'''
 import sys
 import time 
 
 def main():
 
-   # task = input("\n")
     print('\n')
     print("**************************************************")
     print("***** Find Number of Palindromes of size: M ******")
@@ -11,18 +17,22 @@ def main():
     print("**************** Using Digits: D *****************")
     print("**************************************************")
     print('\n')
+    
     while True:
-        # Do problem 2
+        # Get values for n, m, d
         n = int(input("Enter value for N in the range (1 - 99,999): "))
-        digitString = input("Enter digit list separated by space (integers 1 - 9): ")
+        digitString = "1 2 3 4 5 6 7 8 9"
+        #digitString = input("Enter digit list separated by space (integers 1 - 9): ")
         m = int(input("Enter the size of the palindrome (M): "))
         digitSet = []
+
+        #split digitString and store as a list
         for i in digitString.split():
             digitSet.append(int(i))
+        #check n's size
         if n < 1 or n > 99999:
             print("k is out of range")
         else:
-            #print("Performing BFS on the DFA... (this may take a while, please be patient)")
             time.sleep(0.1)
             print('\n')
             palindromes = shortestAcceptedString(n, digitSet, n, m)
@@ -41,7 +51,6 @@ def shortestAcceptedString(k, alphabet, startState, m):
     retVals = bfs(k, alphabet, startState)
 
     print("Answer: ")
-
     if not retVals:
         return "No solution"
 
