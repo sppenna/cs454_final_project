@@ -36,7 +36,11 @@ def main():
             time.sleep(0.1)
             print('\n')
             palindromes = numPalindromes(n, digitSet, n, m)
-            print("The number of palindromes of size M: ", palindromes)
+            
+            if palindromes is 0:
+                print("No solution")
+            else:
+                print("The number of palindromes of size M: ", palindromes)
             print('\n')
 
 def dfaDelta(initialState, inputSymbol, k):
@@ -55,14 +59,14 @@ def numPalindromes(k, digitSet, startState, m):
         return "No solution"
     return retVals
     '''
-    currentstate = retVals[0]
-    nextstate = retVals[1]
+    currentState = retVals[0]
+    nextState = retVals[1]
     parent = retVals[2]
     label = retVals[3]
     output = ""
-    while nextstate != startState:
-        output += str(label[nextstate])
-        nextstate = parent[nextstate]
+    while nextState != startState:
+        output += str(label[nextState])
+        nextState = parent[nextState]
     return output[::-1]
     '''
 
@@ -77,30 +81,30 @@ def generateM(k, digitSet, startState, m):
     label = [-1] * (k + 1)
 
     queue.append(startState)
-    nextstate = -1
-    currentstate = -1
+    nextState = -1
+    currentState = -1
 
     count = 0
     
     while count < m:
-        currentstate = queue.pop(0)
+        currentState = queue.pop(0)
         for c in digitSet:
-            nextstate = dfaDelta(currentstate, c, k)
+            nextState = dfaDelta(currentState, c, k)
             
-            if nextstate == 0:  # accepting state reached
-                parent[nextstate] = currentstate
-                label[nextstate] = c
-                returnVals = [currentstate, nextstate, parent, label]
+            if nextState is 0:  # accepting state reached
+                parent[nextState] = currentState
+                label[nextState] = c
+                returnVals = [currentState, nextState, parent, label]
                 return returnVals
             
-            if nextstate not in visited:
-                visited.append(nextstate)
-                parent[nextstate] = currentstate
-                label[nextstate] = c
-                queue.append(nextstate)
+            if nextState not in visited:
+                visited.append(nextState)
+                parent[nextState] = currentState
+                label[nextState] = c
+                queue.append(nextState)
                 count+=1
                 
-    #if nextstate != 0:
+    #if nextState != 0:
     #    return False
     return queue
     
