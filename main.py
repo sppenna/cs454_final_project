@@ -36,12 +36,13 @@ def main():
         else:
             time.sleep(0.1)
             print('\n')
-            palindromes = numPalindromes(n, digitSet, n, m)
-            
-            if palindromes is 0:
-                print("No solution")
-            else:
-                print("The number of palindromes of size M: ", palindromes)
+            #palindromes = numPalindromes(n, digitSet, n, m)
+            numPalindromes(n, digitSet, n, m)
+
+            #if palindromes is 0:
+            #    print("No solution")
+            #else:
+                #print("The number of palindromes of size M: ", palindromes)
 
 
 def dfaDelta(initialState, inputSymbol, k):
@@ -56,9 +57,9 @@ def numPalindromes(k, digitSet, startState, m):
     retVals = generateM(k, digitSet, startState, m)
     print(retVals)
     print("Answer: ")
-    if not retVals:
-        return "No solution"
-    return retVals
+    #if not retVals:
+        #return "No solution"
+    #return retVals
     '''
     currentState = retVals[0]
     nextState = retVals[1]
@@ -71,43 +72,53 @@ def numPalindromes(k, digitSet, startState, m):
     return output[::-1]
     '''
 
-
 def generateM(k, digitSet, startState, m):
     queue = []
     # visited is an array where each index represents a state, and visited[i] gives true or false
     # based on whether state i has been visited
     # initialize
+    output  = ""
+
     visited = [startState]
-    parent = [-1] * (k + 1)
-    label = [-1] * (k + 1)
+    parent  = [-1] * (k + 1)
+    label   = [-1] * (k + 1)
 
     queue.append(startState)
-    nextState = -1
+    nextState    = -1
     currentState = -1
 
     count = 0
     
-    while count < m:
+    while len(queue) is not 0:
+    #while count < m and len(queue) is not 0:
+        
         currentState = queue.pop(0)
+
+        count+=1
         for c in digitSet:
+    
             nextState = dfaDelta(currentState, c, k)
-            
+
             if nextState is 0:  # accepting state reached
+                
                 parent[nextState] = currentState
                 label[nextState] = c
                 returnVals = [currentState, nextState, parent, label]
-                return returnVals
-            
+
+                while nextState != startState:
+                    output += str(label[nextState])
+                    nextState = parent[nextState]
+                print(output[::-1])
+                
+                output = ""
+                #return returnVals
             if nextState not in visited:
                 visited.append(nextState)
                 parent[nextState] = currentState
                 label[nextState] = c
                 queue.append(nextState)
-                count+=1
                 
-    #if nextState != 0:
-    #    return False
-    return queue
+    #return queue
     
 def generateM_Prime(k, digitSet, startState, m):
     print("in progress")
