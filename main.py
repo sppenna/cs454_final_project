@@ -22,7 +22,7 @@ def main():
         # Get values for n, m, d
         n = int(input("Enter value for N in the range (1 - 99,999): "))
         digitString = "1 2 3 4 5 6 7 8 9"
-        #digitString = input("Enter digit list separated by space (integers 1 - 9): ")
+        #digitString = input("Enter digit list (D) separated by space (integers 1 - 9): ")
         m = int(input("Enter the size of the palindrome (M): "))
         digitSet = []
 
@@ -44,11 +44,11 @@ def dfaDelta(initialState, inputSymbol, k):
 
 
 # noinspection SpellCheckingInspection
-def shortestAcceptedString(k, alphabet, startState, m):
+def shortestAcceptedString(k, digitSet, startState, m):
     # function to solve problem 2
     # finds string of shortest length that is accepted by the DFA
 
-    retVals = bfs(k, alphabet, startState)
+    retVals = bfs(k, digitSet, startState)
 
     print("Answer: ")
     if not retVals:
@@ -65,7 +65,7 @@ def shortestAcceptedString(k, alphabet, startState, m):
     return output[::-1]
 
 
-def bfs(k, alphabet, startState):
+def bfs(k, digitSet, startState):
     queue = []
     # visited is an array where each index represents a state, and visited[i] gives true or false
     # based on whether state i has been visited
@@ -80,7 +80,7 @@ def bfs(k, alphabet, startState):
 
     while queue:
         currentstate = queue.pop(0)
-        for c in alphabet:
+        for c in digitSet:
             nextstate = dfaDelta(currentstate, c, k)
             if nextstate == 0:  # accepting state reached
                 parent[nextstate] = currentstate
