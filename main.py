@@ -119,6 +119,7 @@ def Generate_M(k, digitSet, startState, m):
             # If state has not been visited
             # add the state to the move queue
             elif nextState not in visited: 
+                #Adjacent saves the nextState to the queue and saves its parent
                 visited, parent, label, queue = Adjacent(visited, parent, label, queue,
                                                 c, currentState, nextState)
 
