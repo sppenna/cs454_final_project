@@ -121,7 +121,7 @@ def Generate_M(k, digitSet, startState, m):
     print(queue)
 
 
-def M_Prime_Transition(k, DigitSet, startState, m):
+def M_Prime_Transition(k, digitSet, startState, m):
     print("in progress(M_Prime_Transition)...")
 
 
