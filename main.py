@@ -44,10 +44,9 @@ def M_Transition(initialState, inputSymbol, k):
     return (10 * initialState + inputSymbol) % k
 
 
-# noinspection SpellCheckingInspection
 def NumPalindromes(k, digitSet, startState, m):
-    # function to solve problem 2
-    # finds string of shortest length that is accepted by the DFA
+    # finds a list of viable palindromes of size m
+    # calls Generate_M to do this evaluation
 
     retVals = Generate_M(k, digitSet, startState, m)
     print(retVals)
@@ -66,6 +65,8 @@ def NumPalindromes(k, digitSet, startState, m):
 
 
 def Generate_M(k, digitSet, startState, m):
+    # Generates a list of numbers that are a multiple of k.
+    # this will be used to transition to M_Prime
     queue = []
     # visited is an array where each index represents a state, and visited[i] gives true or false
     # based on whether state i has been visited
@@ -108,7 +109,7 @@ def Generate_M(k, digitSet, startState, m):
                 print("Queue: ", queue)
 
                 output = ""
-            # if state has not been visited
+            # If state has not been visited
             # add the state to the move queue
             elif nextState not in visited: 
                 
