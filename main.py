@@ -87,7 +87,7 @@ def Generate_M(k, digitSet, startState, m):
         
         currentState = queue.pop(0)
         count += 1
-        print("currentState: ", currentState)
+        
         for c in digitSet:
             # generate a M transition for each digit in your digitList
             nextState = M_Transition(currentState, c, k)
@@ -106,8 +106,8 @@ def Generate_M(k, digitSet, startState, m):
                 #print("Visited: ", visited)
                 #print("nextState: ", nextState)
                 #print("Queue: ", queue)
-
                 output = ""
+
             # If state has not been visited
             # add the state to the move queue
             elif nextState not in visited: 
