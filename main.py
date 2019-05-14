@@ -64,6 +64,8 @@ def NumPalindromes(k, digitSet, startState, m):
     '''
 
 def Adjacent(visited, parent, label, queue, c, currentState, nextState):
+    # Helper function saves the nextState to the move queue and
+    # saves its parent as currentState
     visited.append(nextState)
     parent[nextState] = currentState
     label[nextState]  = c
@@ -99,7 +101,7 @@ def Generate_M(k, digitSet, startState, m):
         for c in digitSet:
             # generate a M transition for each digit in your digitList
             nextState = M_Transition(currentState, c, k)
-            
+
             if nextState is 0:  # accepting state reached
 
                 parent[nextState] = currentState
@@ -108,20 +110,20 @@ def Generate_M(k, digitSet, startState, m):
                 while nextState != startState:
                     output      += str(label[nextState])
                     nextState    = parent[nextState]
-                
+
                 print(output[::-1])
                 nextState = int(output[::-1])
-                #print("Visited: ", visited)
+                #print("visited: ", visited)
                 #print("nextState: ", nextState)
-                #print("Queue: ", queue)
+                #print("queue: ", queue)
                 output = ""
 
             # If state has not been visited
             # add the state to the move queue
             elif nextState not in visited: 
-                #Adjacent saves the nextState to the queue and saves its parent
-                visited, parent, label, queue = Adjacent(visited, parent, label, queue,
-                                                c, currentState, nextState)
+                # Adjacent saves the nextState to the queue and saves its parent
+                visited, parent, label, queue = Adjacent( visited, parent, label, queue,
+                                                c, currentState, nextState )
 
     print(queue)
 
