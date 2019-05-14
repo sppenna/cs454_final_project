@@ -63,6 +63,14 @@ def NumPalindromes(k, digitSet, startState, m):
     return output[::-1]
     '''
 
+def Adjacent(visited, parent, label, queue, c, currentState, nextState):
+    visited.append(nextState)
+    parent[nextState] = currentState
+    label[nextState]  = c
+    queue.append(nextState)
+
+    return visited, parent, label, queue
+
 
 def Generate_M(k, digitSet, startState, m):
     # Generates a list of numbers that are a multiple of k.
@@ -111,11 +119,8 @@ def Generate_M(k, digitSet, startState, m):
             # If state has not been visited
             # add the state to the move queue
             elif nextState not in visited: 
-                
-                visited.append(nextState)
-                parent[nextState] = currentState
-                label[nextState]  = c
-                queue.append(nextState)
+                visited, parent, label, queue = Adjacent(visited, parent, label, queue,
+                                                c, currentState, nextState)
 
     print(queue)
 
