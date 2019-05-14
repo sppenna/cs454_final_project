@@ -2,7 +2,7 @@
 CS 454: Final Project
 
 This program will the number of palindromes of size M
-that are multiples of number N using as designated
+that are multiples of number K using as designated
 language of digits D.
 '''
 import sys
@@ -39,11 +39,6 @@ def main():
             #palindromes = numPalindromes(n, digitSet, n, m)
             NumPalindromes(k, digitSet, k, m)
 
-            #if palindromes is 0:
-            #    print("No solution")
-            #else:
-                #print("The number of palindromes of size M: ", palindromes)
-
 
 def M_Transition(initialState, inputSymbol, k):
     return (10 * initialState + inputSymbol) % k
@@ -69,6 +64,7 @@ def NumPalindromes(k, digitSet, startState, m):
     return output[::-1]
     '''
 
+
 def Generate_M(k, digitSet, startState, m):
     queue = []
     # visited is an array where each index represents a state, and visited[i] gives true or false
@@ -87,15 +83,16 @@ def Generate_M(k, digitSet, startState, m):
     count = 1
     
     while len(queue) is not 0:
-        currentState = queue.pop(0)
-        count+=1
         
+        currentState = queue.pop(0)
+        count += 1
+        print("currentState: ", currentState)
         for c in digitSet:
-    
+            # generate a M transition for each digit in your digitList
             nextState = M_Transition(currentState, c, k)
-
+            
             if nextState is 0:  # accepting state reached
-                visited.append(nextState)
+
                 parent[nextState] = currentState
                 label[nextState]  = c
 
@@ -105,20 +102,30 @@ def Generate_M(k, digitSet, startState, m):
                 
                 print(output[::-1])
                 nextState = int(output[::-1])
+                print("Visited: ", visited)
+                print("nextState: ", nextState)
                 queue.append(nextState)
-
+                print("Queue: ", queue)
 
                 output = ""
-               
-            elif nextState not in visited:
+            # if state has not been visited
+            # add the state to the move queue
+            elif nextState not in visited: 
+                
                 visited.append(nextState)
                 parent[nextState] = currentState
                 label[nextState]  = c
                 queue.append(nextState)
-                
-    #return queue
-    
+
+    print(queue)
+
+
+def M_Prime_Transition(k, DigitSet, startState, m):
+    print("in progress(M_Prime_Transition)...")
+
+
 def Generate_M_Prime(k, digitSet, startState, m):
-    print("in progress")
+    print("in progress(Generate_M_Prime)...")
+
 
 main()
