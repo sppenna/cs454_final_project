@@ -48,8 +48,8 @@ def NumPalindromes(k, digitSet, startState, m):
     # finds a list of viable palindromes of size m
     # calls Generate_M to do this evaluation
 
-    retVals = Generate_M(k, digitSet, startState, m)
-    print(retVals)
+    Generate_M(k, digitSet, startState, m)
+
     print("Answer: ")
     '''
     currentState = retVals[0]
@@ -103,10 +103,9 @@ def Generate_M(k, digitSet, startState, m):
                 
                 print(output[::-1])
                 nextState = int(output[::-1])
-                print("Visited: ", visited)
-                print("nextState: ", nextState)
-                queue.append(nextState)
-                print("Queue: ", queue)
+                #print("Visited: ", visited)
+                #print("nextState: ", nextState)
+                #print("Queue: ", queue)
 
                 output = ""
             # If state has not been visited
