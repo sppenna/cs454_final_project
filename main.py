@@ -22,7 +22,8 @@ def main():
         print("**************************************************")
         # Get values for n, m, d
         k = int(input("Enter value for K in the range (1 - 99,999): "))
-        digitString = "1 2 3 4 5 6 7 8 9"
+        digitString = "2 3"
+        #digitString = "1 2 3 4 5 6 7 8 9"
         #digitString = input("Enter digit list (D) separated by space (integers 1 - 9): ")
         m = int(input("Enter the size of the palindrome (M): "))
         digitSet = []
@@ -47,21 +48,10 @@ def M_Transition(initialState, inputSymbol, k):
 def NumPalindromes(k, digitSet, startState, m):
     # finds a list of viable palindromes of size m
     # calls Generate_M to do this evaluation
-
     Generate_M(k, digitSet, startState, m)
 
     print("Answer: ")
-    '''
-    currentState = retVals[0]
-    nextState = retVals[1]
-    parent = retVals[2]
-    label = retVals[3]
-    output = ""
-    while nextState != startState:
-        output += str(label[nextState])
-        nextState = parent[nextState]
-    return output[::-1]
-    '''
+
 
 def Adjacent(visited, parent, label, queue, c, currentState, nextState):
     # Helper function saves the nextState to the move queue and
@@ -98,6 +88,8 @@ def Generate_M(k, digitSet, startState, m):
         currentState = queue.pop(0)
         count += 1
         
+        print("currentState: ", currentState) 
+
         for c in digitSet:
             # generate a M transition for each digit in your digitList
             nextState = M_Transition(currentState, c, k)
