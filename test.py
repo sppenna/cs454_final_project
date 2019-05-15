@@ -18,17 +18,20 @@ def isNotIn(d, k):
     return True
 
 def main():
+
     print('\n')
     print("**************************************************")
     print("***** Find Number of Palindromes of size: M ******")
     print("*********** Which are Multiples of: K ************")
+    print("**************** Using Digits: D *****************")
     print("**************************************************")
     print('\n')
+
     while True:
         print("**************************************************")
         k = int( input("enter a number k: ") )
         m = int( input("enter length of palindrome m: ") )
-        dString = input("Enter digit list (D) separated by space (integers 1 - 9): ")
+        dString = input("Enter digit list separated by space (integers 1 - 9): ")
         out = []
 
         #split digitString and store as a list
@@ -50,6 +53,8 @@ def main():
                 break
             
             count += 1
+        
+        #output
         print('\n')
         print("Number of palindromes of size " + str(m) + ": ",  len(out) )
         if input("print the list of palindromes? (y/n) ") == "y":
