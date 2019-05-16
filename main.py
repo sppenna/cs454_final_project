@@ -21,8 +21,8 @@ def main():
         print( "**************************************************" )
         # Get values for n, m, d
         k = int( input( "Enter value for K in the range (1 - 99,999): ") )
-        digitString = "1 2 3 4 5 6 7 8 9"
-        #digitString = input("Enter digit list (D) separated by space (integers 1 - 9): ")
+        #digitString = "1 2 3 4 5 6 7 8 9"
+        digitString = input("Enter digit list (D) separated by space (integers 1 - 9): ")
         m = int( input("Enter the size of the palindrome (M): ") )
         digitSet = []
 
@@ -35,7 +35,6 @@ def main():
         else:
             time.sleep( 0.1 )
             print( '\n' )
-            #palindromes = numPalindromes(n, digitSet, n, m)
             NumPalindromes( k, digitSet, k, m )
 
 
@@ -47,6 +46,7 @@ def NumPalindromes(k, digitSet, startState, m):
     # finds a list of viable palindromes of size m
     # calls Generate_M to do this evaluation
     dfa = Generate_M( k, digitSet, startState, m )
+    
     print("DFA M:\n")
     for i in range(len(dfa)):
         print(i, ":" , dfa[i])
@@ -85,19 +85,18 @@ def Generate_M(k, digitSet, startState, m):
     dfa = {}
     _next = []
     _prev = []
-
-    for i in range(k):
+    #Generate DFA M. |d| transitions for each state
+    for i in range(m):
         dfa[i] = {}
         for c in digitSet:
             dfa[i][c] = M_Transition(i, c, k)
 
-    return dfa
     '''
     for n in range(k):
-        for j in range(k):
-            first = _prev[dfa[j]['a']]
-            second = _prev[dfa[j]['b']]
-            third = _prev[dfa[j]['c']]
+        for j in range(len(dfa)):
+            first = _prev[dfa[j]['1']]
+            second = _prev[dfa[j]['2']]
+            third = _prev[dfa[j]['3']]
 
             total = first + second + third
             _next.append(total)
@@ -107,6 +106,8 @@ def Generate_M(k, digitSet, startState, m):
 
     print(_prev[0])
     '''
+    return dfa
+    
     
  
 def M_Prime_Transition(k, digitSet, state, m, dfa):
