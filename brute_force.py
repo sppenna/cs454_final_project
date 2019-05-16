@@ -44,6 +44,8 @@ def main():
         print("Generating DFA. This may take a couple minutes...")
         count = 0
 
+        # loop through multiples of k: 
+        # check if output is a palindrome, length = m, and all numbers are in language
         while True:
             
             if isPalindrome( str(k*count) ) and len(str(k*count)) == m and isNotIn(d, k*count):             
