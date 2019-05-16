@@ -70,51 +70,44 @@ def Generate_M(k, digitSet, startState, m):
     # visited is an array where each index represents a state, and visited[i] gives true or false
     # based on whether state i has been visited
     # initialize
-    output  = ""
+    output = ""
 
     visited = [startState]
-    parent  = [-1] * ( k + 1 )
-    label   = [-1] * ( k + 1 )
+    parent = [-1] * (k + 1)
+    label = [-1] * (k + 1)
 
-    queue.append( startState )
-    nextState    = -1
+    queue.append(startState)
+    nextState = -1
     currentState = -1
 
     count = 1
-    
-    while len(queue) is not 0:
-        
-        currentState = queue.pop(0)
-        count += 1
+    dfa = {}
+    _next = []
+    _prev = []
 
+    for i in range(k):
+        dfa[i] = {}
         for c in digitSet:
-            # generate a M transition for each digit in your digitList
-            nextState = M_Transition( currentState, c, k )
+            dfa[i][c] = M_Transition(i, c, k)
 
-            if nextState is 0:  # accepting state reached
+    print(dfa)
 
-                parent[nextState] = currentState
-                label[nextState]  = c
+    '''
+    for n in range(k):
+        for j in range(k):
+            first = _prev[dfa[j]['a']]
+            second = _prev[dfa[j]['b']]
+            third = _prev[dfa[j]['c']]
 
-                while nextState != startState:
-                    output      += str( label[nextState] )
-                    nextState    = parent[nextState]
+            total = first + second + third
+            _next.append(total)
 
-                print(output[::-1])
-                nextState = int( output[::-1] )
-                #print("visited: ", visited)
-                #print("nextState: ", nextState)
-                #print("queue: ", queue)
-                output = ""
+        _prev = _next
+        _next = []
 
-            # If state has not been visited
-            # add the state to the move queue
-            elif nextState not in visited: 
-                # Adjacent saves the nextState to the queue and saves its parent
-                visited, parent, label, queue = Adjacent( visited, parent, label, queue,
-                                                          c, currentState, nextState )
-
-    print( queue )
+    print(_prev[0])
+    '''
+ 
 
 
 def M_Prime_Transition(k, digitSet, startState, m):
