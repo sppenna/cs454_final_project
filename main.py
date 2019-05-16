@@ -65,40 +65,31 @@ def Adjacent(visited, parent, label, queue, c, currentState, nextState):
 
 
 def Generate_M(k, digitSet, startState, m):
-    # Generates a list of numbers that are a multiple of k.
-    # this will be used to transition to M_Prime
-    queue = []
-    # visited is an array where each index represents a state, and visited[i] gives true or false
-    # based on whether state i has been visited
-    # initialize
-    output = ""
-
-    visited = [startState]
-    parent = [-1] * (k + 1)
-    label = [-1] * (k + 1)
-
-    queue.append(startState)
-    nextState = -1
-    currentState = -1
-
-    count = 1
+    # Generate DFA M. |d| transitions for each state
     dfa = {}
     _next = []
     _prev = []
-    #Generate DFA M. |d| transitions for each state
+
     for i in range(m):
         dfa[i] = {}
         for c in digitSet:
             dfa[i][c] = M_Transition(i, c, k)
     
-    var = 0
+    # Find the the amount of m sized numbers that are accepting in
+    # DFA M
+    for i in range(len(dfa)):
+        if i != 37:
+            _prev.append(1)
+        else:
+            _prev.append(0)
     
+    var = 0
+
     for n in range(m):
         for j in range(len(dfa)):
-            for i in digitSet:
-                var += _prev[dfa[j][i]]
+            for c in digitSet:
+                var += _prev[dfa[j][c]]
 
-            print(var)
             _next.append(var)
             var = 0
 
