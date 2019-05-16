@@ -107,11 +107,16 @@ def Generate_M(k, digitSet, startState, m):
 
     print(_prev[0])
     '''
+    
  
 
 
-def M_Prime_Transition(k, digitSet, startState, m):
+def M_Prime_Transition(k, digitSet, state, m, dfa):
     print("in progress(M_Prime_Transition)...")
+    for i in range(k):
+        for c in digitSet:
+            if dfa[1][c] == state:
+                return 1
 
 
 def Generate_M_Prime(k, digitSet, startState, m):
