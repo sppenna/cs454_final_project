@@ -47,9 +47,7 @@ def M_Transition(initialState, inputSymbol, k):
 def NumPalindromes(k, digitSet, startState, m):
     # finds a list of viable palindromes of size m
     # calls Generate_M to do this evaluation
-    Generate_M( k, digitSet, startState, m )
-
-    print("Answer: ")
+    dfa = Generate_M( k, digitSet, startState, m )
 
 
 def Adjacent(visited, parent, label, queue, c, currentState, nextState):
@@ -90,7 +88,7 @@ def Generate_M(k, digitSet, startState, m):
         for c in digitSet:
             dfa[i][c] = M_Transition(i, c, k)
 
-    print(dfa)
+    return dfa
 
     '''
     for n in range(k):
