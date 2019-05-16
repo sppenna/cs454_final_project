@@ -9,7 +9,6 @@ import sys
 import time 
 
 def main():
-
     print('\n')
     print( "**************************************************" )
     print( "***** Find Number of Palindromes of size: M ******" )
@@ -48,6 +47,10 @@ def NumPalindromes(k, digitSet, startState, m):
     # finds a list of viable palindromes of size m
     # calls Generate_M to do this evaluation
     dfa = Generate_M( k, digitSet, startState, m )
+    print("DFA M:\n")
+    for i in range(len(dfa)):
+        print(i, ":" , dfa[i])
+    print('\n')
 
 
 def Adjacent(visited, parent, label, queue, c, currentState, nextState):
@@ -89,7 +92,6 @@ def Generate_M(k, digitSet, startState, m):
             dfa[i][c] = M_Transition(i, c, k)
 
     return dfa
-
     '''
     for n in range(k):
         for j in range(k):
@@ -107,8 +109,6 @@ def Generate_M(k, digitSet, startState, m):
     '''
     
  
-
-
 def M_Prime_Transition(k, digitSet, state, m, dfa):
     print("in progress(M_Prime_Transition)...")
     for i in range(k):
