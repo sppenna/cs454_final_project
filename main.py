@@ -21,7 +21,7 @@ def main():
         print( "**************************************************" )
         # Get values for n, m, d
         k = int( input( "Enter value for K in the range (1 - 99,999): " ) )
-        digitString = "1 2 3 4 5 6 7 8 9"
+        digitString = "0 1 2 3 4 5 6 7 8 9"
         #digitString = input("Enter digit list (D) separated by space (integers 1 - 9): ")
         m = int( input("Enter the size of the palindrome (M): ") )
         digitSet = []
@@ -46,12 +46,14 @@ def NumPalindromes(k, digitSet, startState, m):
     # finds a list of viable palindromes of size m
     # calls Generate_M to do this evaluation
     dfa = Generate_M( k, digitSet, startState, m )
-    
-    #print("DFA M:\n")
-    #for i in range(len(dfa)):
-    #    print(i, ":" , dfa[i])
-    #print('\n')
+        
+    print("DFA M:\n")
 
+    for i in range(len(dfa)):
+        print(i, ":" , dfa[i])
+    
+    print('\n')
+    
 
 def Adjacent(visited, parent, label, queue, c, currentState, nextState):
     # Helper function saves the nextState to the move queue and
@@ -70,33 +72,41 @@ def Generate_M(k, digitSet, startState, m):
     _next = []
     _prev = []
 
-    for i in range(m):
+    i = 0
+    solutionList = []
+    while len(str(i)) < m:
+    #for i in range(len(m)):
         dfa[i] = {}
         for c in digitSet:
             dfa[i][c] = M_Transition(i, c, k)
+            if M_Transition(i, c, k) is 0:
+                if i is not 0:
+                    solutionList.append(str(i)+str(c))
+                elif c is not 0:
+                    solutionList.append(str(c))
     
+        i += 1
+    
+    print(solutionList)
     # Find the the amount of m sized numbers that are accepting in
     # DFA M
-    for i in range(len(dfa)):
-        if i != 37:
-            _prev.append(1)
-        else:
-            _prev.append(0)
-    
-    var = 0
-
+    '''
+    solution = []
     for n in range(m):
+        var = []
         for j in range(len(dfa)):
             for c in digitSet:
-                var += _prev[dfa[j][c]]
-            print(var)
-            _next.append(var)
-            var = 0
+                if dfa[j][c] is 0:
+                    print("test")
+    '''                
 
-        prev = _next
-        _next = []
+        #prev  = _next
+        #_next = []
     
-    print(_prev[0])
+    #print(len(solution))
+    #for i in solution:
+    #    print(i)
+    #print(_prev[0])
     
     return dfa
     
