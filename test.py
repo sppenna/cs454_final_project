@@ -40,8 +40,8 @@ def main():
             d.append(int(i))
 
         print("finding palindrome of size: " + str(m) + ", that is a multiple of: " + str(k) )
-        print("using only digits in language: ", d)
-
+        print("using only digits in language: ", d, '\n')
+        print("Generating DFA. This may take a couple minutes...")
         count = 0
 
         while True:

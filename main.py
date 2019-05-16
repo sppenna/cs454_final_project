@@ -11,7 +11,7 @@ import time
 def main():
 
     print('\n')
-    print("**************************************************")
+    print( "**************************************************" )
     print( "***** Find Number of Palindromes of size: M ******" )
     print( "*********** Which are Multiples of: K ************" )
     print( "**************** Using Digits: D *****************" )
