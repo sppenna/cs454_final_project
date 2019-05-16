@@ -9,7 +9,7 @@ import sys
 import time 
 
 def main():
-    print('\n')
+    print( '\n' )
     print( "**************************************************" )
     print( "***** Find Number of Palindromes of size: M ******" )
     print( "*********** Which are Multiples of: K ************" )
@@ -20,7 +20,7 @@ def main():
     while True:
         print( "**************************************************" )
         # Get values for n, m, d
-        k = int( input( "Enter value for K in the range (1 - 99,999): ") )
+        k = int( input( "Enter value for K in the range (1 - 99,999): " ) )
         #digitString = "1 2 3 4 5 6 7 8 9"
         digitString = input("Enter digit list (D) separated by space (integers 1 - 9): ")
         m = int( input("Enter the size of the palindrome (M): ") )
@@ -90,22 +90,23 @@ def Generate_M(k, digitSet, startState, m):
         dfa[i] = {}
         for c in digitSet:
             dfa[i][c] = M_Transition(i, c, k)
-
-    '''
-    for n in range(k):
+    
+    var = 0
+    
+    for n in range(m):
         for j in range(len(dfa)):
-            first = _prev[dfa[j]['1']]
-            second = _prev[dfa[j]['2']]
-            third = _prev[dfa[j]['3']]
+            for i in digitSet:
+                var += _prev[dfa[j][i]]
 
-            total = first + second + third
-            _next.append(total)
+            print(var)
+            _next.append(var)
+            var = 0
 
-        _prev = _next
+        prev = _next
         _next = []
-
+    
     print(_prev[0])
-    '''
+    
     return dfa
     
     
