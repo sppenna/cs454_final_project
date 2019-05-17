@@ -7,6 +7,7 @@ language of digits D.
 '''
 import sys
 import time 
+import numpy as np
 
 def main():
     print( '\n' )
@@ -49,8 +50,8 @@ def NumPalindromes(k, digitSet, startState, m):
         
     print("DFA M:\n")
 
-    for i in range(1, len(dfa)):
-        print(i, ":" , dfa[i])
+    #for i in range(1, len(dfa)):
+    #    print(i, ":" , dfa[i])
     
     print('\n')
     
@@ -74,20 +75,38 @@ def Generate_M(k, digitSet, startState, m):
 
     i = 1
     solutionList = []
+
+    if m % 2 is 0:
+        x = m//2
+    else:
+        x = m//2 + 1
     
-    while len(str(i)) <= m:
+    while len(str(i)) <= x:
     
         dfa[i] = {}
         for c in digitSet:
             dfa[i][c] = M_Transition(i, c, k)
-            if M_Transition(i, c, k) is 0:
-                if i is not 0:
-                    solutionList.append(str(i)+str(c))
-                elif c is not 0:
-                    solutionList.append(str(c))
+            if len(str(i)) is x:
+            #   if M_Transition(i, c, k) is 0:
+                #if i is not 0:
+                solutionList.append( str(i) )
+                #elif c is not 0:
+                #    solutionList.append(str(c))
     
         i += 1
     
+    final = []
+    for i in solutionList:
+        if m % 2 is 0:
+            i += i[::-1]
+            if int(i) % k is 0:
+                final.append(i)
+        else:
+            i += i[0:-1]
+            if int(i) % k is 0:
+                final.append(i)
+
+    print( np.unique(final) )
     #print(solutionList)
     # Find the the amount of m sized numbers that are accepting in
     # DFA M
