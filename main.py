@@ -2,8 +2,7 @@
 CS 454: Final Project
 
 This program will the number of palindromes of size M
-that are multiples of number K using as designated
-language of digits D.
+that are multiples of number K.
 '''
 import sys
 import time 
@@ -14,7 +13,6 @@ def main():
     print( "**************************************************" )
     print( "***** Find Number of Palindromes of size: M ******" )
     print( "*********** Which are Multiples of: K ************" )
-    print( "**************** Using Digits: D *****************" )
     print( "**************************************************" )
     print( '\n' )
     
@@ -22,8 +20,7 @@ def main():
         print( "**************************************************" )
         # Get values for n, m, d
         k = int( input( "Enter value for K in the range (1 - 99,999): " ) )
-        digitString = "1 2 3 4 5 6 7 8 9"
-        #digitString = input("Enter digit list (D) separated by space (integers 1 - 9): ")
+        digitString = "0 1 2 3 4 5 6 7 8 9"
         m = int( input("Enter the size of the palindrome (M): ") )
         digitSet = []
 
@@ -46,14 +43,21 @@ def M_Transition(initialState, inputSymbol, k):
 def NumPalindromes(k, digitSet, startState, m):
     # finds a list of viable palindromes of size m
     # calls Generate_M to do this evaluation
-    dfa = Generate_M( k, digitSet, startState, m )
+    dfa, palindromes = Generate_M( k, digitSet, startState, m )
         
     print("DFA M:\n")
 
-    #for i in range(1, len(dfa)):
-    #    print(i, ":" , dfa[i])
+    for i in range(1, len(dfa)):
+        print(i, ":" , dfa[i])
     
+    print( "Number of Palindromes: ", len( np.unique(palindromes) ) )
+    
+    yn = input("Display Palindromes? (y/n): ")
+    
+    if yn is 'Y' or 'y':
+        print( np.unique(palindromes) )
     print('\n')
+    
     
 
 def Adjacent(visited, parent, label, queue, c, currentState, nextState):
@@ -106,7 +110,7 @@ def Generate_M(k, digitSet, startState, m):
             if int(i) % k is 0:
                 final.append(i)
 
-    print( np.unique(final) )
+    #print( len( np.unique(final) ) )
     #print(solutionList)
     # Find the the amount of m sized numbers that are accepting in
     # DFA M
@@ -128,7 +132,7 @@ def Generate_M(k, digitSet, startState, m):
     #    print(i)
     #print(_prev[0])
     
-    return dfa
+    return dfa, final
     
     
  
