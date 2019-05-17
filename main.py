@@ -21,7 +21,7 @@ def main():
         print( "**************************************************" )
         # Get values for n, m, d
         k = int( input( "Enter value for K in the range (1 - 99,999): " ) )
-        digitString = "0 1 2 3 4 5 6 7 8 9"
+        digitString = "1 2 3 4 5 6 7 8 9"
         #digitString = input("Enter digit list (D) separated by space (integers 1 - 9): ")
         m = int( input("Enter the size of the palindrome (M): ") )
         digitSet = []
@@ -49,7 +49,7 @@ def NumPalindromes(k, digitSet, startState, m):
         
     print("DFA M:\n")
 
-    for i in range(len(dfa)):
+    for i in range(1, len(dfa)):
         print(i, ":" , dfa[i])
     
     print('\n')
@@ -72,10 +72,11 @@ def Generate_M(k, digitSet, startState, m):
     _next = []
     _prev = []
 
-    i = 0
+    i = 1
     solutionList = []
-    while len(str(i)) < m:
-    #for i in range(len(m)):
+    
+    while len(str(i)) <= m:
+    
         dfa[i] = {}
         for c in digitSet:
             dfa[i][c] = M_Transition(i, c, k)
@@ -87,7 +88,7 @@ def Generate_M(k, digitSet, startState, m):
     
         i += 1
     
-    print(solutionList)
+    #print(solutionList)
     # Find the the amount of m sized numbers that are accepting in
     # DFA M
     '''
