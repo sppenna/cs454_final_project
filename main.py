@@ -45,17 +45,21 @@ def NumPalindromes(k, digitSet, startState, m):
     # calls Generate_M to do this evaluation
     dfa, palindromes = Generate_M( k, digitSet, startState, m )
         
-    print("DFA M:\n")
-
-    for i in range(1, len(dfa)):
-        print(i, ":" , dfa[i])
-    
     print( "Number of Palindromes: ", len( np.unique(palindromes) ) )
-    
-    yn = input("Display Palindromes? (y/n): ")
-    
+    print('\n')
+        
+    yn = input( "Display Palindromes? (y/n): ")
     if yn is 'Y' or 'y':
         print( np.unique(palindromes) )
+        print('\n')
+
+    yn = input( "Display the DFA? (y/n): " )
+    if yn is 'Y' or 'y':
+        print("DFA M:\n")
+
+        for i in range(1, len(dfa)):
+            print(i, ":" , dfa[i])
+        
     print('\n')
     
     
